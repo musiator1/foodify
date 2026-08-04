@@ -77,7 +77,7 @@ export default function Dashboard() {
     await supabase.from('food_entries').delete().eq('id', id);
   };
 
-  const handleSaveAsMeal = async (mealType: string, typeMeals: any[]) => {
+  const handleSaveAsMeal = async (_mealType: string, typeMeals: any[]) => {
     if (!user) return;
     const mealName = window.prompt(`Podaj nazwę dla tego posiłku (np. "Moja owsianka"):`);
     if (!mealName || mealName.trim() === '') return;

@@ -4,7 +4,7 @@ import { useUser } from "@/lib/useUser";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Activity, TrendingUp, Save, Scale, History, Trash2, Edit3, ChevronDown, ChevronUp } from "lucide-react";
+import { Activity, TrendingUp, Scale, History, Trash2, Edit3, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function Progress() {
   const { user } = useUser();

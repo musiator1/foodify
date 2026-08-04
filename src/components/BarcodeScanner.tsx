@@ -25,7 +25,7 @@ export default function BarcodeScanner({ onResult, onClose }: BarcodeScannerProp
         scanner.clear();
         onResult(decodedText);
       },
-      (errorMessage) => {
+      (_errorMessage) => {
         // Ignorujemy błędy, bo skaner wyrzuca je co klatkę, gdy nie widzi kodu
       }
     );
