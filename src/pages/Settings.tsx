@@ -165,10 +165,25 @@ export default function Settings() {
             <label className="text-sm font-medium text-foreground mb-2 block">Dzienny limit kalorii (kcal)</label>
             <Input type="number" value={profile.daily_calories_goal} onChange={(e) => setProfile({...profile, daily_calories_goal: Number(e.target.value)})} className="text-lg font-semibold h-12" />
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div><label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">Białko (g)</label><Input className="h-11 text-center" type="number" value={profile.protein_goal} onChange={(e) => setProfile({...profile, protein_goal: Number(e.target.value)})} /></div>
-            <div><label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">Węgle (g)</label><Input className="h-11 text-center" type="number" value={profile.carbs_goal} onChange={(e) => setProfile({...profile, carbs_goal: Number(e.target.value)})} /></div>
-            <div><label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">Tłuszcz (g)</label><Input className="h-11 text-center" type="number" value={profile.fat_goal} onChange={(e) => setProfile({...profile, fat_goal: Number(e.target.value)})} /></div>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
+            <div>
+              <label className="text-[11px] sm:text-xs font-semibold text-muted-foreground uppercase whitespace-nowrap mb-2 block">
+                Białko (g)
+              </label>
+              <Input className="h-11 text-center" type="number" value={profile.protein_goal} onChange={(e) => setProfile({...profile, protein_goal: Number(e.target.value)})} />
+            </div>
+            <div>
+              <label className="text-[11px] sm:text-xs font-semibold text-muted-foreground uppercase whitespace-nowrap mb-2 block">
+                Węgle (g)
+              </label>
+              <Input className="h-11 text-center" type="number" value={profile.carbs_goal} onChange={(e) => setProfile({...profile, carbs_goal: Number(e.target.value)})} />
+            </div>
+            <div>
+              <label className="text-[11px] sm:text-xs font-semibold text-muted-foreground uppercase whitespace-nowrap mb-2 block">
+                Tłuszcz (g)
+              </label>
+              <Input className="h-11 text-center" type="number" value={profile.fat_goal} onChange={(e) => setProfile({...profile, fat_goal: Number(e.target.value)})} />
+            </div>
           </div>
         </CardContent>
       </Card>
