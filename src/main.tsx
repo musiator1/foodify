@@ -2,8 +2,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { Analytics } from '@vercel/analytics/react'
 
-// Dodaj to pod importami w main.tsx
+// Ustawienia motywu
 const savedTheme = localStorage.getItem('theme') || 'zinc';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
@@ -14,6 +15,7 @@ if (isDark) document.documentElement.classList.add('dark');
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
+    <Analytics />
   </StrictMode>,
 )
 
