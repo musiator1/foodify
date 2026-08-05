@@ -1,6 +1,6 @@
 {
-  "short_name": "Foodify",
-  "name": "Foodify - Dziennik",
+  "short_name": "PureKcal",
+  "name": "PureKcal",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#09090b",
