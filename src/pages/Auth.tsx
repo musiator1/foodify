@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, UserCircle2 } from 'lucide-react';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // Nowy stan dla oczka
+  const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,13 +36,26 @@ export default function Auth() {
     }
   };
 
+  // Nowa funkcja dla Gościa
+  const handleGuestLogin = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signInAnonymously();
+      if (error) throw error;
+    } catch (err: any) {
+      setError(err.message || 'Nie udało się wejść jako gość.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
       
-      {/* Kontener główny z animacją wejścia */}
       <div className="w-full max-w-sm space-y-8 animate-in fade-in zoom-in-95 duration-500">
         
-        {/* Nagłówek i Logo z puszką */}
+        {/* Nagłówek */}
         <div className="flex flex-col items-center justify-center text-center space-y-3">
           <div className="w-16 h-16 bg-primary/10 rounded-3xl flex items-center justify-center mb-2 shadow-sm text-4xl">
             🥫
@@ -57,10 +70,9 @@ export default function Auth() {
           </p>
         </div>
 
-        {/* Formularz */}
+        {/* Formularz główny */}
         <form onSubmit={handleAuth} className="space-y-4 mt-8">
           <div className="space-y-3">
-            {/* Pole Email */}
             <div className="relative">
               <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input 
@@ -74,7 +86,6 @@ export default function Auth() {
               />
             </div>
             
-            {/* Pole Hasło */}
             <div className="relative">
               <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input 
@@ -90,30 +101,24 @@ export default function Auth() {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1"
-                tabIndex={-1} // Żeby nie łapało focusa przy przeskakiwaniu Tabem
+                tabIndex={-1}
               >
-                {showPassword ? (
-                  <EyeOff className="w-5 h-5" />
-                ) : (
-                  <Eye className="w-5 h-5" />
-                )}
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
             </div>
           </div>
           
-          {/* Komunikaty o błędach/sukcesie */}
           {error && (
-            <div className="p-3 text-sm text-destructive bg-destructive/10 rounded-xl font-medium animate-in fade-in slide-in-from-top-2">
+            <div className="p-3 text-sm text-destructive bg-destructive/10 rounded-xl font-medium">
               {error}
             </div>
           )}
           {message && (
-            <div className="p-3 text-sm text-emerald-600 bg-emerald-500/10 rounded-xl font-medium animate-in fade-in slide-in-from-top-2">
+            <div className="p-3 text-sm text-emerald-600 bg-emerald-500/10 rounded-xl font-medium">
               {message}
             </div>
           )}
           
-          {/* Przycisk akcji */}
           <Button 
             type="submit" 
             disabled={loading}
@@ -122,6 +127,29 @@ export default function Auth() {
             {loading ? 'Ładowanie...' : (isLogin ? 'Zaloguj się' : 'Utwórz darmowe konto')}
           </Button>
         </form>
+
+        {/* LUB WEJDŹ JAKO GOŚĆ (Nowa sekcja) */}
+        <div className="relative py-4">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-muted-foreground/20" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground font-semibold">
+              Albo przetestuj
+            </span>
+          </div>
+        </div>
+
+        <Button 
+          type="button" 
+          variant="outline"
+          disabled={loading}
+          onClick={handleGuestLogin}
+          className="w-full h-14 rounded-xl font-bold text-base border-2 hover:bg-muted/50 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+        >
+          <UserCircle2 className="w-5 h-5" />
+          Wejdź bez logowania jako Gość
+        </Button>
         
         {/* Przełącznik Logowanie / Rejestracja */}
         <div className="text-center pt-2">
