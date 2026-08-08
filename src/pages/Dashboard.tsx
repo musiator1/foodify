@@ -327,14 +327,14 @@ export default function Dashboard() {
                             </div>
                           ) : (
                             <>
-                              <div className="flex-1 pr-2">
+                              <div className="flex-1 pr-2 min-w-0">
                                 <p className="font-medium text-sm text-foreground capitalize truncate">{meal.name.toLowerCase()}</p>
-                                <p className="text-[11px] text-muted-foreground mt-0.5">
+                                <p className="text-[11px] text-muted-foreground mt-0.5 truncate">
                                   {meal.grams}g • B:{meal.protein} W:{meal.carbs} T:{meal.fat}
                                 </p>
                               </div>
-                              <div className="flex items-center gap-3">
-                                <span className="font-semibold text-foreground text-sm">{meal.calories} kcal</span>
+                              <div className="flex items-center gap-3 shrink-0">
+                                <span className="font-semibold text-foreground text-sm whitespace-nowrap">{meal.calories} kcal</span>
                                 <div className="flex gap-1">
                                   <button 
                                     onClick={() => { setEditingItemId(meal.id); setEditGrams(meal.grams); }} 
